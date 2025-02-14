@@ -1,0 +1,23 @@
+
+
+<div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="card" *ngFor="let menu of menuProperties">
+        <div class="card-header" id="menu{{menu.id}}">
+            <h2 class="mb-0">
+                <button class="btn btn-block text-left" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOne' + menu.id" aria-expanded="false" aria-controls="flush-collapseOne">
+                    <i class="{{menu.icon}}"></i> &nbsp;  {{menu.titre}}
+        </button>
+            </h2>
+        </div>
+        <div id="flush-collapseOne{{menu.id}}" class="accordion-collapse collapse" [attr.aria-labelledby]="'menu' + menu.id" data-bs-parent="#accordionFlushExample">
+
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item btn btn-primary" *ngFor="let sousMenu of menu.sousMenu"> <a (click)="navigate(sousMenu.url)"><i class="{{sousMenu.icon}}"></i> &nbsp;{{sousMenu.titre}}</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -27,13 +27,7 @@ export class MenuComponent implements OnInit {
         id:'11',
         titre:'Vue d\'ensemble',
         icon:'fa fa-chart-pie',
-        url:'vue-densemble'
-      },
-      {
-        id:'12',
-        titre:'Statistique',
-        icon:'fas fa-chart-bar',
-        url:'statistique'
+        url:'dashboard/statistique'
       }
     ]
   },
@@ -48,7 +42,7 @@ export class MenuComponent implements OnInit {
         id:'21',
         titre:'Clients',
         icon:'fa fa-user',
-        url:'dashboard/client'
+        url:'dashboard/utilisateurs'
       },
       {
         id:'22',

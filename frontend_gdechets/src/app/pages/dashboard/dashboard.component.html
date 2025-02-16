@@ -3,7 +3,7 @@
         <div class="card col-md-2 me-2">
             <div class="col">
                 <div class="card mt-3 mb-2 text-center border-none">
-                    <h4>ADMIN-G-DECHETS</h4>
+                    <h4>ADMIN <br> G-DECHETS</h4>
                 </div>
                 <div>
                    <app-menu></app-menu>
@@ -11,79 +11,20 @@
             </div>
         </div>
         <div class="card col-md-10 ps-0 pe-0 background-grey border-none">
-
+         
             <div class="col ps-0 pe-0 d-flex flex-column justify-content-between">
                 <div class="card mb-2 p-2 min-height-80">
                     <app-header></app-header>
                 </div>
-                <div class="card mb-2" style="min-height: 780px;">
-           
-                    <main class="col-md-9 col-lg-10 mx-auto px-md-9">
-                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                          <h1 class="h2">Tableau de Bord</h1>
-                        </div>
-                  
-                        <div class="row">
-                            <div class="col-md-4">
-                              <div class="card text-white bg-primary mb-4">
-                                <div class="card-body">
-                                  <h5 class="card-title">Points de Collecte</h5>
-                                  <p class="card-text">Total : 150</p>
-                                </div>
-                              </div>
-                            </div>
-                          
-                            <div class="col-md-4">
-                              <div class="card text-white bg-success mb-4">
-                                <div class="card-body">
-                                  <h5 class="card-title">Collectes Aujourd’hui</h5>
-                                  <p class="card-text">35 camions en tournée</p>
-                                </div>
-                              </div>
-                            </div>
-                          
-                            <div class="col-md-4">
-                              <div class="card text-white bg-danger mb-34">
-                                <div class="card-body">
-                                  <h5 class="card-title">Alertes Débordement</h5>
-                                  <p class="card-text">12 bacs pleins à 100%</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                           <div class="col-md-6">  
-                              <div class="chart-container">
-                                 <canvas baseChart
-                                  [data]="barChartData"
-                                  [options]="barChartOptions"
-                                  [type]="barChartType">
-                                 </canvas>
-                                 <canvas baseChart
-                                  [data]="lineChartData"
-                                  [type]="lineChartType">
-                                </canvas>
-                             </div>
-                        </div>
-                        <div class="col-md-6">  
-                              <div class="chart-container">
-                               <canvas baseChart
-                               [data]="pieChartData"
-                               [type]="pieChartType">
-                               </canvas>
-                              </div>
-                        </div>
-                    </div>
-                      </main>
-                   
-                     
 
-                </div>
+                       <div class="card mb-2" style="min-height: 780px;">
+                            <router-outlet></router-outlet>
+                       </div>
+
                 <div class="card min-height-80 text-center">
                     Copyright &copy; SmarTech Mali
-
-
                 </div>
+                
             </div>
 
         </div>

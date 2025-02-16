@@ -22,8 +22,10 @@
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^3.9.1",
     "font-awesome": "^4.7.0",
+    "ng-angular-popup": "^0.6.6",
     "ng2-charts": "^4.0.0",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.16.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },

@@ -1,1 +1,96 @@
-<p>list-client works!</p>
+<div class="row m-3">
+    <div class="col">
+        <div class="row m-3">
+
+            <div class="col-md-8 p-0">
+                <h1>Liste des utilisateurs</h1>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="button" (click)="reloadPage()" class="btn btn-warning">Actualiser</button>
+                    </div>
+
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-success">Exporter</button>
+                    </div>
+                    <div class="col-md-4">
+                       
+                        <button type="button" class="btn btn-primary" (click)="goToAddClient()" >Nouveau</button>
+                       
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row m-3">
+
+            <div class="col-md-9 d-flex justify-content-md-start">
+                <div class="col-auto pe-2">
+                    <label for="inputPassword6" class="col-form-label">Afficher</label>
+                </div>
+                <div class="col-auto">
+                    <select style="width: 95px;" class="form-select" (change)="onTableSizeChange($event)">
+    <option *ngFor="let size of tableSizes">
+           {{size}}
+    </option>
+            </select>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-3 d-flex justify-content-md-end pb-2">
+                <div class="col-auto me-2">
+                    <label for="inputPassword6" class="col-form-label">Rechercher</label>
+                </div>
+                <div class="col-auto">
+                    <input type="search" [(ngModel)]="myFilterText" class="form-control" aria-describedby="passwordHelpInline">
+                </div>
+            </div>
+
+            <table class="table table-striped table-bordered table-sm row-border hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom </th>
+                        <th>Prénom</th>
+                        <th>E-mail</th>
+                        <th>Téléphone</th>
+                        <th>Roles</th>
+                        <th>Action</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users | filter: myFilterText | paginate:{
+                        itemsPerPage: tableSize,
+                        currentPage: page,
+                        totalItems: count}; let i = index  ">
+
+                        <td> {{ user.id }} </td>
+                        <td> {{ user.nom }} </td>
+                        <td> {{ user.prenom}} </td>
+                        <td> {{ user.email}} </td>
+                        <td> {{ user.telephone}} </td>
+                        <td> {{ user.role}} </td>
+                        <td>
+                            <button (click)="updateClient(user.id)" class="btn btn-info"> Modifier</button>
+                            <button (click)="deleteClient(user.id)" class="btn btn-danger" style="margin-left: 10px"> Supprimer</button>
+
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div>
+                <pagination-controls class="d-flex justify-content-md-end" previousLabel="Précédent" nextLabel="Suivant" (pageChange)="onTableDataChange($event)">
+
+                </pagination-controls>
+            </div>
+
+        </div>
+
+    </div>
+</div>

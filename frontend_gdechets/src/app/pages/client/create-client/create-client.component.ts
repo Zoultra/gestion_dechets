@@ -3,8 +3,8 @@ import { UserService } from '../../../components/services/users/user.service';
 import { Router } from '@angular/router';
 import { User } from '../../../components/models/user';
 import { NgToastService } from 'ng-angular-popup';
-import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
+import { AlertService } from '../../../components/services/alert/alert.service';
 
 @Component({
   selector: 'app-create-client',
@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 
 export class CreateClientComponent implements OnInit {
 
-  constructor(private router: Router, private toast: NgToastService, private userService: UserService) { }
+  constructor(private router: Router, private toast: NgToastService, private userService: UserService, private alertService: AlertService) { }
     
   
   user : User = new User()
@@ -26,29 +26,31 @@ export class CreateClientComponent implements OnInit {
   }
     
   onSubmit(){
-    this.saveUser()
-  }
+             this.saveUser()
+           }
 
-  
-    showAlert() {
-      Swal.fire({
-        title: 'Alerte !',
-        text: 'Ceci est une alerte avec SweetAlert2.',
-        icon: 'warning',
-        confirmButtonText: 'OK'
-      });
-    }
     
-  saveUser(){
-    
-    this.userService.createUser(this.user).subscribe( data =>{
-      console.log(data)
-      this.showAlert()
-    },
-    error => {
-      this.showAlert()
-       })
-  }
+       saveUser(){
+             this.userService.createUser(this.user).subscribe( data =>{
+              this.alertService.showLoading('Enregistrement en cours...', 5000);
+              setTimeout(() => {
+                // Ferme l'alerte de chargement
+               
+                this.alertService.closeLoading();
+                // Affiche une alerte de succès avec un symbole de vérification
+                // Afficher l'alerte de succès
+                this.alertService.confirmSuccess('Enregistrement effectué', 2000);
+              }, 3000);
+              console.log(data)
+                                                                      },
+                  error => {
+                             this.alertService.confirmError('Enregistrement echoué', 2000)
+                           })
+            }
+       
 
 }
+
+  
+ 
 

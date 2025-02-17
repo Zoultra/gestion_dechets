@@ -42,7 +42,7 @@ export class MenuComponent implements OnInit {
         id:'21',
         titre:'Clients',
         icon:'fa fa-user',
-        url:'dashboard/utilisateurs'
+        url:'dashboard/utilisateurs/liste'
       },
       {
         id:'22',

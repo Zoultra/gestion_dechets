@@ -9,29 +9,31 @@ import { User } from '../../models/user';
 
 export class UserService {
    
-  private baseURL = "http://localhost:8080/gdechets/user";
-  
+  private baseURL = "http://localhost:3100/users/ajouter";
+  private baseURL2 = "http://localhost:3100/users/liste";
+  private baseURL3 = "http://localhost:3100/users/recherche";
+  private baseURL4 = "http://localhost:3100/users/update";
 
   constructor(private httpClient: HttpClient) { }
 
   
   getUserList(): Observable<User[]>{
-    return this.httpClient.get<User[]>(`${this.baseURL}`);
+    return this.httpClient.get<User[]>(`${this.baseURL2}`);
   }
 
   createUser(user: User): Observable<Object>{
-    return this.httpClient.post(`${this.baseURL}`, User);
+    return this.httpClient.post(`${this.baseURL}`, user);
   }
   
-  updateUser(userId: number, appUser: User): Observable<Object>{
-    return this.httpClient.put(`${this.baseURL}/${userId}`, User);
+  updateUser(id: number, user: User): Observable<Object>{
+    return this.httpClient.put(`${this.baseURL4}/${id}`, user);
   }
 
   deleteUser(userId: number): Observable<Object>{
     return this.httpClient.delete(`${this.baseURL}/${userId}`);
   }
-  getUserById(userId: number): Observable<User>{
-    return this.httpClient.get<User>(`${this.baseURL}/${userId}`);
+  getUserById(id: number): Observable<User>{
+    return this.httpClient.get<User>(`${this.baseURL3}/${id}`);
   }
 }
 

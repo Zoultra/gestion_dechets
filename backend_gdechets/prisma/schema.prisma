@@ -9,9 +9,14 @@ datasource db {
 
 model User {
   id        Int      @id @default(autoincrement()) // Clé primaire auto-incrémentée
-  username  String   @unique
+  prenom    String
+  nom       String
+  telephone String   @unique
   email     String   @unique
   password  String
+  role      String
   createdAt DateTime @default(now()) // Date de création automatique
   updatedAt DateTime @updatedAt
 } 
+
+ 

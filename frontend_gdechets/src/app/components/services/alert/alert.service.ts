@@ -64,4 +64,42 @@ confirmWarning(message: string = 'Attention !', timer: number = 2000) {
 }
 
 
+success(message: string, title: string = "Succès") {
+  Swal.fire({
+    title: title,
+    text: message,
+    icon: "success",
+    confirmButtonColor: "#3085d6",
+    confirmButtonText: "OK"
+  });
+}
+
+error(message: string, title: string = "Erreur") {
+  Swal.fire({
+    title: title,
+    text: message,
+    icon: "error",
+    confirmButtonColor: "#d33",
+    confirmButtonText: "OK"
+  });
+}
+
+confirmDelete(callback: () => void) {
+  Swal.fire({
+    title: "Êtes-vous sûr ?",
+    text: "Cette action est irréversible !",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Oui, supprimer !",
+    cancelButtonText: "Annuler"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      callback(); // Exécute l'action de suppression
+    }
+  });
+}
+
+
 }

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../components/models/user';
 import { UserService } from '../../../components/services/users/user.service';
-import { NgToastService } from 'ng-angular-popup';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FilterPipe } from '../../../pipes/filter.pipe';
+import { AlertService } from '../../../components/services/alert/alert.service';
  
 
 @Component({
@@ -31,7 +31,7 @@ export class ListClientComponent implements  OnInit {
   tableSize: number = 5;
   tableSizes: any = [5, 10, 15, 20]
  
-  constructor(private userService: UserService,private toast: NgToastService,private route: ActivatedRoute, private router: Router) { }
+  constructor(private userService: UserService,private alertService: AlertService,private route: ActivatedRoute, private router: Router) { }
    
 
   ngOnInit(): void {
@@ -51,10 +51,21 @@ export class ListClientComponent implements  OnInit {
       }
     });
 
-   
-
-
   }
+
+  
+
+  deleteClient(id: number) {
+    this.alertService.confirmDelete(() => {
+      this.userService.deleteUser(id).subscribe(() => {
+        this.alertService.success("Utilisateur supprimé avec succès !");
+        this.getUserList(); // Rafraîchir la liste
+      }, error => {
+        this.alertService.error("La suppression a échoué.");
+      });
+    });
+  }
+  
 
   onTableDataChange(event: any){
     this.page = event;
@@ -72,20 +83,7 @@ export class ListClientComponent implements  OnInit {
     this.router.navigate(['dashboard/utilisateurs/update', id]);
   }
 
-  deleteClient(userId: number){
- 
-          this.userService.deleteUser(userId).subscribe( next => {
-           setTimeout(() => {
-           this.reloadPage();
-              }, 2000);
-
-           },
-error => {
-  error({detail:"Message d'erreur",summary:"Echec, reéssayer encore",duration:5000});
-}
-)
-
-  }
+   
 
 
 /* reload*/

@@ -23,11 +23,11 @@ export const getUsers = async (req: Request, res: Response, next: NextFunction) 
 export const updateUser = async (req: Request, res: Response, next: NextFunction) => {
     try { 
         const id = Number(req.params.id); // ✅ Conversion propre en number
-        const { username, email, password } = req.body;
+        const {nom, prenom, email, telephone,role } = req.body;
 
         const updatedUser = await prisma.user.update({
             where: { id },
-            data: { username, email, password },
+            data: {nom, prenom, email, telephone,role },
         });
 
         res.json({ success: true, data: updatedUser, message: "Utilisateur mis à jour avec succès" });
@@ -77,20 +77,20 @@ export const createUser = async (req: Request, res: Response) => {
         const user = await prisma.user.findUnique({ where: { id } });
 
         if (user) {
-            res.status(204).send();
+          await prisma.user.delete({ where: { id } });
+
+          res.json({ success: true, message: "Utilisateur supprimé avec succès" });
+         
           } else {
             res.status(404).json({ message: 'Utilisateur non trouvé' });
           }
         // Supprimer l'utilisateur
-        await prisma.user.delete({ where: { id } });
-
-        res.json({ success: true, message: "Utilisateur supprimé avec succès" });
+       
     } catch (error) {
         res.status(500).json({ message: "Erreur du serveur", error });
         next(error);
     }
 };
- 
  
  
 
@@ -99,7 +99,7 @@ export const createUser = async (req: Request, res: Response) => {
         const id = Number(req.params.id);
         const user = await prisma.user.findUnique({ where: { id } });
           if (user) {
-            res.json({ success: true, message: "Affichage de la liste des utilisateurs", data: user });
+            res.json({ success: true, message: "Liste des utilisateurs", data: user });
           } else {
             res.status(404).json({ message: 'Utilisateur non trouvé' });
           }
@@ -114,9 +114,9 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const loginUser = async (req: Request, res: Response): Promise<void> => {
     try {
-      const { username, password } = req.body;
+      const { telephone, password } = req.body;
   
-      const user = await prisma.user.findUnique({ where: { username } });
+      const user = await prisma.user.findUnique({ where: { telephone } });
       if (!user) {
         res.status(404).json({ message: "Utilisateur non trouvé" });
         return;
@@ -128,7 +128,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
         return;
       }
   
-      const token = jwt.sign({ idUser: user.id, username }, TOKEN_KEY, { expiresIn: "120s" });
+      const token = jwt.sign({ idUser: user.id, telephone }, TOKEN_KEY, { expiresIn: "120s" });
   
       res.status(200).json({ message: "Connexion réussie", user, token });
     } catch (error) {

@@ -15,8 +15,62 @@ model User {
   email     String   @unique
   password  String
   role      String
+  pointDeCollecte   PointDeCollecte?
   createdAt DateTime @default(now()) // Date de création automatique
   updatedAt DateTime @updatedAt
 } 
 
+
+
+ model PointDeCollecte {
+  id                Int                 @id @default(autoincrement())
+  localisation      String
+  userId          Int                 @unique
+  user              User              @relation(fields: [userId], references: [id])
+  itineraireId      Int?
+  itineraire        Itineraire?         @relation(fields: [itineraireId], references: [id])
+  poubelles         PoubelleConnectee[]
+  createdAt DateTime @default(now()) // Date de création automatique
+  updatedAt DateTime @updatedAt
+}
+
+model Itineraire {
+  id               Int                 @id @default(autoincrement())
+  nom              String
+  date             DateTime
+  heureDepart      DateTime
+  chauffeurId      Int
+  pointsDeCollecte PointDeCollecte[]
+  createdAt DateTime @default(now()) // Date de création automatique
+  updatedAt DateTime @updatedAt
+}
+
+model PoubelleConnectee {
+  id                Int                 @id @default(autoincrement())
+  niveauRemplissage Int
+  etat              String
+  capteurID           String              @unique
+  pointDeCollecteId Int
+  pointDeCollecte   PointDeCollecte     @relation(fields: [pointDeCollecteId], references: [id])
+  alertes           Alerte[]
+  createdAt DateTime @default(now()) // Date de création automatique
+  updatedAt DateTime @updatedAt
+}
+
+model Alerte {
+  id          Int                @id @default(autoincrement())
+  message     String
+  date        DateTime            @default(now())
+  poubelleId  Int
+  poubelle    PoubelleConnectee   @relation(fields: [poubelleId], references: [id])
+  createdAt DateTime @default(now()) // Date de création automatique
+  updatedAt DateTime @updatedAt
+}
+
+
+ 
+
+ 
+ 
+ 
  

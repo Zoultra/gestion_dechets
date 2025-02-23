@@ -1,0 +1,196 @@
+<div class="row m-3">
+    <div class="col">
+        <div class="row m-3">
+
+            <div class="col-md-6 p-0">
+                <h1>Liste des poubelles</h1>
+               
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="button" (click)="reloadPage()" class="btn btn-warning">Actualiser</button>
+                    </div>
+                    <div class="col-md-4">
+                    <button class="btn btn-primary mb-3" (click)="toggleAffichage()">
+                        {{ modeAffichage === 'table' ? 'Afficher en Icônes' : 'Afficher en Tableau' }}
+                          </button>
+                        </div>
+                    <div class="col-md-4">
+                       
+                        <button type="button" class="btn btn-primary" (click)="goToAddPoubelle()" >Nouveau</button>
+                       
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div *ngIf="modeAffichage === 'table'" class="row m-3">
+
+            <div class="col-md-9 d-flex justify-content-md-start">
+                <div class="col-auto pe-2">
+                    <label for="inputPassword6" class="col-form-label">Afficher</label>
+                </div>
+                <div class="col-auto">
+                    <select style="width: 95px;" class="form-select" (change)="onTableSizeChange($event)">
+    <option *ngFor="let size of tableSizes">
+           {{size}}
+    </option>
+            </select>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-3 d-flex justify-content-md-end pb-2">
+                <div class="col-auto me-2">
+                    <label for="inputPassword6" class="col-form-label">Rechercher</label>
+                </div>
+                <div class="col-auto">
+                    <input type="search" [(ngModel)]="myFilterText" class="form-control" aria-describedby="passwordHelpInline">
+                </div>
+            </div>
+
+            <table class="table table-striped table-bordered table-sm row-border hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ID Capteur</th>
+                        <th>Etat</th>
+                        <th>Client</th>
+                        <th>Niveau (%)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let poubelle of poubelles | filter: myFilterText | paginate:{
+                        itemsPerPage: tableSize,
+                        currentPage: page,
+                        totalItems: count}; let i = index  ">
+
+                        <td> {{ poubelle.id }} </td>
+                        <td> {{ poubelle.capteurID }} </td>
+                        <td> 
+                            <span class="badge" 
+                               [class.bg-success]="poubelle.etat === 'Actif'"
+                               [class.bg-secondary]="poubelle.etat === 'Hors Service'">
+                               {{ poubelle.etat }}
+                          </span>
+                       </td>
+                        <td> {{ poubelle.user.prenom}} {{ poubelle.user.nom}} </td>
+                        <td> 
+                            <span class="badge" 
+                               [class.bg-danger]="poubelle.niveauRemplissage >= 80"
+                               [class.bg-success]="poubelle.niveauRemplissage < 80"
+                               [class.bg-warning]="poubelle.niveauRemplissage >= 70 && poubelle.niveauRemplissage < 80">
+                               {{ poubelle.niveauRemplissage }}%
+                           </span>
+                        </td>
+                        <td>
+                            <button (click)="updatePoubelle(poubelle.id)" class="btn btn-info"> Modifier</button>
+                            <button (click)="deletePoubelle(poubelle.id)" class="btn btn-danger" style="margin-left: 10px"> Supprimer</button>
+
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div>
+                <pagination-controls class="d-flex justify-content-md-end" previousLabel="Précédent" nextLabel="Suivant" (pageChange)="onTableDataChange($event)">
+
+                </pagination-controls>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    
+    <div *ngIf="modeAffichage === 'icon'" class="row m-0">
+        <div class="row m-3"> 
+    <div  class="row">
+
+        <div class="col-md-9 d-flex justify-content-md-start">
+            <div class="col-auto pe-2">
+                <label for="inputPassword6" class="col-form-label">Afficher</label>
+            </div>
+            <div class="col-auto">
+                <select style="width: 95px;" class="form-select" (change)="onTableSizeChange($event)">
+<option *ngFor="let size of tableSizes">
+       {{size}}
+</option>
+        </select>
+            </div>
+        </div>
+
+        <div class="col-md-3 d-flex justify-content-md-end pb-2">
+            <div class="col-auto me-2">
+                <label for="inputPassword6" class="col-form-label">Rechercher</label>
+            </div>
+            <div class="col-auto">
+                <input type="search" [(ngModel)]="myFilterText" class="form-control" aria-describedby="passwordHelpInline">
+            </div>
+        </div>
+
+      <div class="col-md-4 mb-3" *ngFor="let poubelle of poubelles | filter: myFilterText | paginate:{
+        itemsPerPage: tableSize,
+        currentPage: page,
+        totalItems: count}; let i = index ">
+        <div class="card text-center shadow">
+          <div class="card-body">
+            <!-- Icône de poubelle avec remplissage -->
+            <div class="position-relative">
+              <i class="bi bi-trash3-fill display-1"
+                [ngClass]="{
+                  'text-success': poubelle.niveauRemplissage < 50,
+                  'text-warning': poubelle.niveauRemplissage >= 50 && poubelle.niveauRemplissage < 80,
+                  'text-danger': poubelle.niveauRemplissage >= 80
+                }">
+              </i>
+              <span class="position-absolute top-50 start-50 translate-middle badge bg-dark text-white p-2">
+                {{ poubelle.niveauRemplissage }}%
+              </span>
+            </div>
+            <h5 class="card-title mt-2">{{ poubelle.userId }}</h5>
+            <p class="card-text">
+              <span class="badge"
+                [ngClass]="{
+                  'bg-success': poubelle.etat === 'Actif',
+                  'bg-secondary': poubelle.etat === 'Hors Service'
+                }">
+                {{ poubelle.etat }}
+              </span>
+            </p>
+            <button class="btn btn-sm btn-danger me-2"
+                    (click)="updatePoubelle(poubelle.id)">
+              Modifier
+            </button>
+            <button class="btn btn-sm btn-success"
+                    (click)="deletePoubelle(poubelle.id)">
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <pagination-controls class="d-flex justify-content-md-end" previousLabel="Précédent" nextLabel="Suivant" (pageChange)="onTableDataChange($event)">
+
+        </pagination-controls>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+ 
+    
+</div>
+
+
+
+ 
+ 
+  

@@ -1,0 +1,98 @@
+<div class="row m-3">
+    <div class="container my-container">
+      <div class="card w-100 mx-auto shadow-lg rounded">
+        
+        <div class="card-header text-center bg-primary text-white">
+          <h3 class="m-0">Enregistrer une nouvelle poubelle</h3>
+        </div>
+  
+        <form [formGroup]="poubelleForm" (ngSubmit)="savePoubelle()">
+          <div class="card-body">
+            <div class="row g-3 row-cols-1 row-cols-md-2 row-cols-lg-3">
+              
+              <!-- Localisation -->
+              <div class="col">
+                <div class="form-floating">
+                  <input 
+                    type="text" 
+                    id="localisation" 
+                    class="form-control" 
+                    [(ngModel)]="poubelle.localisation" 
+                    formControlName="localisation" 
+                    required 
+                    placeholder="12.5733, -7.98444">
+                  <label for="localisation">Localisation (Latitude, Longitude)</label>
+                </div>
+              </div>
+  
+              <!-- Adresse -->
+              <div class="col">
+                <div class="form-floating">
+                  <input 
+                    type="text" 
+                    id="adresse" 
+                    class="form-control" 
+                    [(ngModel)]="poubelle.adresse" 
+                    formControlName="adresse" 
+                    required 
+                    placeholder="Adresse">
+                  <label for="adresse">Adresse</label>
+                </div>
+              </div>
+  
+              <!-- ID du Capteur -->
+              <div class="col">
+                <div class="form-floating">
+                  <input 
+                    type="text" 
+                    id="capteurID" 
+                    class="form-control" 
+                    [(ngModel)]="poubelle.capteurID"  
+                    formControlName="capteurID" 
+                    required 
+                    placeholder="ID du Capteur">
+                  <label for="capteurID">ID du Capteur</label>
+                </div>
+              </div>
+  
+              <!-- Niveau de Remplissage (readonly) -->
+              <div class="col">
+                <div class="form-floating">
+                  <input type="text" class="form-control" value="Défini automatiquement" readonly>
+                  <label>Niveau de Remplissage</label>
+                </div>
+              </div>
+  
+              <!-- Affectation Client -->
+              <div class="col">
+                <div class="form-floating">
+                  <select 
+                    class="form-select" 
+                    id="userId" 
+                    formControlName="userId">
+                    <option *ngFor="let client of clients" [value]="client.id">
+                      {{ client.id }} - {{ client.prenom }} {{ client.nom }} ({{ client.email }})
+                    </option>
+                  </select>
+                  <label for="userId">Affecter à un client</label>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+          <!-- Bouton d'ajout -->
+          <div class="card-footer text-center bg-light">
+            <button (click)="goToPoubelleList()"  class="btn btn-danger px-4">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+              </button>
+            <button [disabled]="poubelleForm.invalid" type="submit" class="btn btn-success px-4 m-3">
+              <i  class="fa fa-floppy-o" aria-hidden="true"></i> Ajouter Poubelle
+            </button>
+          </div>
+        </form>
+  
+      </div>
+    </div>
+  </div>
+  

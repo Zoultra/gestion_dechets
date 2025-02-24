@@ -40,6 +40,7 @@ export class CreateClientComponent implements OnInit {
                 // Affiche une alerte de succès avec un symbole de vérification
                 // Afficher l'alerte de succès
                 this.alertService.confirmSuccess('Enregistrement effectué', 2000);
+                this.goToClientList()
               }, 3000);
               console.log(data)
                                                                       },
@@ -47,7 +48,10 @@ export class CreateClientComponent implements OnInit {
                              this.alertService.confirmError('Enregistrement echoué', 2000)
                            })
             }
-       
+
+            goToClientList(){
+              this.router.navigate(['/dashboard/utilisateurs/liste']); 
+            }
 
 }
 

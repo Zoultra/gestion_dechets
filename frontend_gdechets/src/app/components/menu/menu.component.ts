@@ -48,40 +48,52 @@ export class MenuComponent implements OnInit {
         id:'22',
         titre:'Chauffeurs',
         icon:'fa fa-user',
-        url:'dashboard/client'
+        url:'dashboard/chauffeur/liste'
       } ,
      
       {
         id:'23',
-        titre:'Administrateurs',
+        titre:'Admins',
         icon:'fa fa-user',
-        url:'dashboard/client'
+        url:'dashboard/admin/liste'
       } 
     ]
   },
   {
     id:'3',
-    titre:'Poubelle',
-    icon:'fas fa-cubes',
+    titre:'Poubelles',
+    icon:'fa fa-trash',
     url:'',
     sousMenu: [
       {
         id:'31',
-        titre:'Gestion des Poubelles',
-        icon:'fas fa-edit',
-        url:'dashboard/poubelle'
+        titre:'Gestion',
+        icon:'fa fa-pencil-square-o',
+        url:'dashboard/poubelles/liste'
+      } ,
+      {
+        id:'32',
+        titre:'Carte Interactive',
+        icon:'fa fa-globe',
+        url:'dashboard/poubelles/carte'
       } 
     ]
   },
   {
     id:'4',
-    titre:'Etudiants',
+    titre:'Collectes',
     icon:'fa fa-users',
     url:'',
     sousMenu: [
       {
         id:'41',
-        titre:'Gestion des etudiants',
+        titre:'Itinéraire',
+        icon:'fas fa-edit',
+        url:'dashboard/list-etudiant'
+      } ,
+      {
+        id:'41',
+        titre:'Historique',
         icon:'fas fa-edit',
         url:'dashboard/list-etudiant'
       } 
@@ -89,53 +101,53 @@ export class MenuComponent implements OnInit {
   },
   {
     id:'4bis',
-    titre:'Paiements',
+    titre:'Services',
     icon:'fa fa-users',
     url:'',
     sousMenu: [
       {
         id:'4bis1',
-        titre:'Gestion des Paiements',
+        titre:'Gestion',
         icon:'fas fa-edit',
         url:'dashboard/ajouter-paiement'
-      }/*,
+      },
       {
         id:'4bis2',
-        titre:'Situation des Paiements',
+        titre:'Commandes',
         icon:'fa fa-info-circle',
         url:'situation-paiement'
-      }*/
+      }
     ]
   },
   {
     id:'5',
-    titre:'Departement',
+    titre:'Signalement',
     icon:'fas fa-plus',
     url:'',
     sousMenu: [
       {
         id:'51',
-        titre:'Gestion des departements',
+        titre:'Signalement Citoyens',
         icon:'fas fa-edit',
         url:'dashboard/list-departement'
-      }/*,
+      },
       {
         id:'52',
-        titre:'UE / departements',
+        titre:'Réclammations',
         icon:'fa fa-info-circle',
         url:''
-      }*/
+      }
     ]
   },
   {
     id:'6',
-    titre:'UE',
+    titre:'Conseils',
     icon:'fas fa-plus',
     url:'',
     sousMenu: [
       {
         id:'61',
-        titre:'Gestion des UEs',
+        titre:'Gestion',
         icon:'fas fa-edit',
         url:'dashboard/list-ue'
       }/*,
@@ -146,144 +158,11 @@ export class MenuComponent implements OnInit {
         url:''
       }*/
     ]
-  },
-  {
-    id:'7',
-    titre:'Matières',
-    icon:'fa fa-book',
-    url:'',
-    sousMenu: [
-      {
-        id:'71',
-        titre:'Gestion des matières',
-        icon:'fa fa-edit',
-        url:'dashboard/list-matiere'
-      }/*,
-      {
-        id:'72',
-        titre:'Matières / Examens',
-        icon:'fa fa-info-circle',
-        url:''
-      }*/
-    ]
-  },
-  {
-    id:'8',
-    titre:'Notes',
-    icon:'fas fa-plus',
-    url:'',
-    sousMenu: [
-      {
-        id:'81',
-        titre:'Saisir note',
-        icon:'fa fa-edit',
-        url:'dashboard/note'
-      },
-      {
-        id:'82',
-        titre:'Notes / Classes',
-        icon:'fa fa-info-circle',
-        url:'dashboard/note'
-      }
-    ]
-  },
-  {
-    id:'9',
-    titre:'Professeurs',
-    icon:'fas fa-user-secret',
-    url:'',
-    sousMenu: [
-      {
-        id:'91',
-        titre:'Gestion des professeurs',
-        icon:'fa fa-edit',
-        url:'dashboard/professeur-list'
-      },
-      {
-        id:'92',
-        titre:'Professeurs / Matières',
-        icon:'fa fa-info-circle',
-        url:'dashboard/prof-matiere'
-      }
-    ]
-  },
-  {
-    id:'99',
-    titre:'Personnels',
-    icon:'fas fa-user-secret',
-    url:'',
-    sousMenu: [
-      {
-        id:'991',
-        titre:'Gestion des personnels',
-        icon:'fa fa-edit',
-        url:'dashboard/list-personnel'
-      },
-      {
-        id:'992',
-        titre:'Personnel / Salaire',
-        icon:'fa fa-info-circle',
-        url:'dashboard/personnel-salaire'
-      }
-    ]
-  },
-  {
-    id:'10',
-    titre:'Dépenses',
-    icon:'fa fa-tasks',
-    url:'',
-    sousMenu: [
-      {
-        id:'101',
-        titre:'Gestion des dépenses',
-        icon:'fa fa-user',
-        url:'dashboard/gestion-depense/list-depense'
-      } 
-       
-    ]
-  },
-  {
-    id:'11',
-    titre:'Utilisateurs',
-    icon:'fa fa-tasks',
-    url:'',
-    sousMenu: [
-      {
-        id:'111',
-        titre:'Gestion des comptes',
-        icon:'fa fa-user',
-        url:'dashboard/gestion-user/list-user'
-      },
-      {
-        id:'112',
-        titre:'Mon compte',
-        icon:'fa fa-user',
-        url:'dashboard/gestion-compte'
-      }
-       
-    ]
-  },
-  {
-    id:'113',
-    titre:'Années',
-    icon:'fa fa-tasks',
-    url:'',
-    sousMenu: [
-      {
-        id:'1113',
-        titre:'Gestion des années scolaires',
-        icon:'fa fa-user',
-        url:'dashboard/gestion-annee/list-annee'
-      },
-      {
-        id:'1114',
-        titre:'Mon compte',
-        icon:'fa fa-user',
-        url:'dashboard/gestion-annee'
-      }
-       
-    ]
-  }
+  }, 
+  
+   
+  
+   
 ];
 
   constructor(

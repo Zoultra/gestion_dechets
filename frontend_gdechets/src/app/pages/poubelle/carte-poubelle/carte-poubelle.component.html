@@ -1,1 +1,21 @@
-<p>carte-poubelle works!</p>
+<div class="container mt-4">
+    <h2 class="mb-3">Carte des Poubelles Connectées</h2>
+  
+    <div class="card shadow-lg">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-map"></i> Localisation des poubelles</span>
+        <button class="btn btn-primary btn-sm" (click)="zoomToPoubelles()">
+          <i class="bi bi-zoom-in"></i> Zoomer
+        </button>
+      </div>
+      <div class="card-body p-0">
+        <div class="map-container">
+          <div id="map"></div>
+        </div>
+      </div>
+
+     
+    </div>
+  </div>
+  
+ 

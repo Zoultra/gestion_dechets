@@ -9,32 +9,40 @@ import { User } from '../../models/user';
 
 export class UserService {
    
-  private baseURL = "http://localhost:3100/users/ajouter";
-  private baseURL2 = "http://localhost:3100/users/liste";
-  private baseURL3 = "http://localhost:3100/users/recherche";
-  private baseURL4 = "http://localhost:3100/users/update";
-  private baseURL5 = "http://localhost:3100/users/delete";
+  private baseURLclient = "http://localhost:3100/api/clients";
+
+  private baseURLchauffeur = "http://localhost:3100/api/chauffeurs";
+  
+  private baseURLadmin = "http://localhost:3100/api/admins";
 
   constructor(private httpClient: HttpClient) { }
 
   
   getUserList(): Observable<User[]>{
-    return this.httpClient.get<User[]>(`${this.baseURL2}`);
+    return this.httpClient.get<User[]>(`${this.baseURLclient}`);
   }
 
   createUser(user: User): Observable<Object>{
-    return this.httpClient.post(`${this.baseURL}`, user);
+    return this.httpClient.post(`${this.baseURLclient}`, user);
   }
   
   updateUser(id: number, user: User): Observable<Object>{
-    return this.httpClient.put(`${this.baseURL4}/${id}`, user);
+    return this.httpClient.put(`${this.baseURLclient}/${id}`, user);
   }
 
   deleteUser(id: number): Observable<Object>{
-    return this.httpClient.delete(`${this.baseURL5}/${id}`);
+    return this.httpClient.delete(`${this.baseURLclient}/${id}`);
   }
   getUserById(id: number): Observable<User>{
-    return this.httpClient.get<User>(`${this.baseURL3}/${id}`);
+    return this.httpClient.get<User>(`${this.baseURLclient}/${id}`);
+  }
+
+  getChauffeursList(): Observable<User>{
+    return this.httpClient.get<User>(`${this.baseURLchauffeur}`);
+  }
+
+  getAdminList(): Observable<User>{
+    return this.httpClient.get<User>(`${this.baseURLadmin}`);
   }
 }
 

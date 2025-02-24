@@ -6,7 +6,6 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
 model User {
   id        Int      @id @default(autoincrement()) // Clé primaire auto-incrémentée
   prenom    String
@@ -15,21 +14,7 @@ model User {
   email     String   @unique
   password  String
   role      String
-  pointDeCollecte   PointDeCollecte?
-  createdAt DateTime @default(now()) // Date de création automatique
-  updatedAt DateTime @updatedAt
-} 
-
-
-
- model PointDeCollecte {
-  id                Int                 @id @default(autoincrement())
-  localisation      String
-  userId          Int                 @unique
-  user              User              @relation(fields: [userId], references: [id])
-  itineraireId      Int?
-  itineraire        Itineraire?         @relation(fields: [itineraireId], references: [id])
-  poubelles         PoubelleConnectee[]
+  poubellesConnectees PoubelleConnectee[]  // Correction de la casse
   createdAt DateTime @default(now()) // Date de création automatique
   updatedAt DateTime @updatedAt
 }
@@ -40,7 +25,7 @@ model Itineraire {
   date             DateTime
   heureDepart      DateTime
   chauffeurId      Int
-  pointsDeCollecte PointDeCollecte[]
+  poubellesConnectees PoubelleConnectee[] // Correction de la casse et du nom
   createdAt DateTime @default(now()) // Date de création automatique
   updatedAt DateTime @updatedAt
 }
@@ -48,14 +33,19 @@ model Itineraire {
 model PoubelleConnectee {
   id                Int                 @id @default(autoincrement())
   niveauRemplissage Int
-  etat              String
-  capteurID           String              @unique
-  pointDeCollecteId Int
-  pointDeCollecte   PointDeCollecte     @relation(fields: [pointDeCollecteId], references: [id])
-  alertes           Alerte[]
-  createdAt DateTime @default(now()) // Date de création automatique
-  updatedAt DateTime @updatedAt
+  etat             String
+  localisation     String
+  userId           Int?                 
+  user             User?                @relation(fields: [userId], references: [id])
+  itineraireId     Int?
+  itineraire       Itineraire?         @relation(fields: [itineraireId], references: [id])
+  capteurID        String              @unique
+  adresse          String              
+  alertes          Alerte[]
+  createdAt        DateTime @default(now()) // Date de création automatique
+  updatedAt        DateTime @updatedAt
 }
+
 
 model Alerte {
   id          Int                @id @default(autoincrement())

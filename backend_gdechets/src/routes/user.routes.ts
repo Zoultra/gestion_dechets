@@ -1,13 +1,17 @@
 import express from "express";
-import { getUsers, createUser, updateUser, deleteUser, findById, loginUser } from "../controllers/user.controller";
+import { getClients, createUser, updateUser, deleteUser, findById, loginUser, getChauffeurs, getAdmins } from "../controllers/user.controller";
 import { authenticateToken } from "../middlewares/authMiddleware";
 const router = express.Router();
 
-router.get("/liste", getUsers);
-router.post("/ajouter", createUser);
-router.put("/update/:id", updateUser);
-router.delete("/delete/:id", deleteUser);
-router.get("/recherche/:id", findById);
-router.post("/login", loginUser);
+router.get("/clients", getClients);
+router.post("/clients", createUser);
+router.put("/clients/:id", updateUser);
+router.delete("/clients/:id", deleteUser);
+router.get("/clients/:id", findById);
+router.post("/clients/login", loginUser);
+
+router.get("/chauffeurs", getChauffeurs);
+router.get("/admins", getAdmins);
+ 
 
 export default router;

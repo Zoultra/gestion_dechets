@@ -18,7 +18,7 @@ export class UpdateClientComponent implements OnInit {
   
   user : User = new User()
   id!: number
-  
+  role!: string
   constructor(private userService: UserService,private route: ActivatedRoute, private router: Router, private alertService: AlertService) { }
 
   ngOnInit(): void {
@@ -52,9 +52,16 @@ export class UpdateClientComponent implements OnInit {
                             this.alertService.closeLoading();
                             // Affiche une alerte de succès avec un symbole de vérification
                             // Afficher l'alerte de succès
-                            this.alertService.confirmSuccess('Mise à jour effectuée avec succès', 2000);
+                           
+                            
+                              this.alertService.confirmSuccess('Mise à jour effectuée avec succès', 2000);
+                        
+                              this.goToClientList()
+                         
+                            
                           }, 3000);
         console.log(this.user);
+       
       },
       (error) => {
 

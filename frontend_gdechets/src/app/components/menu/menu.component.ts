@@ -40,7 +40,7 @@ export class MenuComponent implements OnInit {
     sousMenu: [
       {
         id:'21',
-        titre:'Clients',
+        titre:'Citoyens',
         icon:'fa fa-user',
         url:'dashboard/utilisateurs/liste'
       },

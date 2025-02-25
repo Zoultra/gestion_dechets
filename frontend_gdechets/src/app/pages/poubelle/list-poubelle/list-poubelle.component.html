@@ -58,7 +58,8 @@
                         <th>ID</th>
                         <th>ID Capteur</th>
                         <th>Etat</th>
-                        <th>Client</th>
+                        <th>Beneficiaire</th>
+                        <th>Adresse</th>
                         <th>Niveau (%)</th>
                         <th>Action</th>
                     </tr>
@@ -78,7 +79,8 @@
                                {{ poubelle.etat }}
                           </span>
                        </td>
-                        <td> {{ poubelle.user.prenom}} {{ poubelle.user.nom}} </td>
+                       <td> {{ poubelle.user.prenom}} {{ poubelle.user.nom}} </td>
+                        <td> {{ poubelle.adresse}} </td>
                         <td> 
                             <span class="badge" 
                                [class.bg-danger]="poubelle.niveauRemplissage >= 80"
@@ -153,7 +155,7 @@
                 {{ poubelle.niveauRemplissage }}%
               </span>
             </div>
-            <h5 class="card-title mt-2">{{ poubelle.userId }}</h5>
+            <h5 class="card-title mt-2">{{ poubelle.adresse }}</h5>
             <p class="card-text">
               <span class="badge"
                 [ngClass]="{

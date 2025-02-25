@@ -16,7 +16,7 @@ import { CartePoubelleComponent } from './pages/poubelle/carte-poubelle/carte-po
  
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard/statistique', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent ,
 
     children:[ 

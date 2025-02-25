@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import * as L from 'leaflet';
 const DefaultIcon = L.icon({
-  iconUrl: '/assets/leaflet/poubelle.png', // Assure-toi que ce fichier existe
+  iconUrl: '/assets/leaflet/poubellegif.gif', // Assure-toi que ce fichier existe
   //shadowUrl: '/assets/leaflet/marker1.jpeg',
   iconSize: [25, 41],
   iconAnchor: [12, 41],
